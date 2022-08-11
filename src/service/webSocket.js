@@ -5,6 +5,7 @@ export const getUsers = (ws, sort) => {
 }
 
 export const updateUser = (ws, sort, id, field, value) => {
+    console.log(sort)
     ws.send(JSON.stringify({ method: 'update', event: 'user', id: id, field: field, value: value ? value : null, sort: sort ? sort : 'ASC' }))
 }
 

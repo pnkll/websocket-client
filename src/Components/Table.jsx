@@ -18,12 +18,18 @@ const Table = (props) => {
     }
 
     function handleAdd(el, idx) {
+        console.log(sort)
         if (inputsData[idx].value !== '' && inputsData[idx].key !== '') {
-            updateUser(props.ws, sort ? 'DESC' : 'ASC', el[0].id, inputsData[idx].key, inputsData[idx].value)
+            updateUser(props.ws, sort ? 'ASC' : 'DESC', el[0].id, inputsData[idx].key, inputsData[idx].value)
             setInputsData(inputsData.map((el, index) => index === idx ? { ...el, error: null, value: '', key: '' } : el))
         } else {
             setInputsData(inputsData.map((el, index) => index === idx ? { ...el, error: `Please fill ${inputsData[idx].value === '' && inputsData[idx].key !== '' ? 'value' : inputsData[idx].key === '' && inputsData[idx].value !== '' ? 'key' : ''}` } : el))
         }
+    }
+
+    function handleRemove(id, key){
+        console.log(sort)
+        updateUser(props.ws, sort ? 'ASC' : 'DESC', id, key)
     }
 
     function computedData(users) {
@@ -52,7 +58,7 @@ const Table = (props) => {
                         <button onClick={() => handleAdd(el, index)}>Append</button>
                         {el.map((elem, subIndex) =>
                             <div key={subIndex} className='table__elem-value' style={{ background: elem.color, display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>{elem.value}
-                                <button onClick={() => updateUser(props.ws, sort ? 'ASC' : 'DESC', elem.id, elem.key)}>Delete</button>
+                                <button onClick={()=>handleRemove(elem.id,elem.key)}>Delete</button>
                             </div>
                         )}
                         <CustomInput placeholder='key' index={index} inputsData={inputsData} setInputsData={setInputsData} />
