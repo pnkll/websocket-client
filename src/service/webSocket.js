@@ -23,3 +23,7 @@ export const updateConnect = (ws, setConnection, setData, data, func) => {
         setData(JSON.parse(e.data))
     }
 }
+
+export const updateUsers = (ws,list) => {
+    ws.send(JSON.stringify({ method: 'update', event: 'users', list}))
+}
