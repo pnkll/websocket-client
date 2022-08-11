@@ -27,7 +27,7 @@ const Table = (props) => {
         }
     }
 
-    function handleRemove(id, key){
+    function handleRemove(id, key) {
         console.log(sort)
         updateUser(props.ws, sort ? 'ASC' : 'DESC', id, key)
     }
@@ -47,18 +47,23 @@ const Table = (props) => {
         <>
             <div className="table-container" style={{ display: "flex" }}>
                 {computedData(props.users).map((el, index) => <div key={index} style={{ display: 'flex' }}>
-                    {index === 0 && <div className="table__elem" style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                        <div className="table__elem-value" onClick={() => handleSort()}>id:</div>
-                        <div className="table__elem-value">firstname:</div>
-                        <div className="table__elem-value">lastname:</div>
-                        <div className="table__elem-value">age</div>
-                        <div className="table__elem-value">country</div>
-                    </div>}
+                    {index === 0 &&
+                        <div className="table__elem" style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "25px" }}>
+                        {/* //     <div className="table__elem-value" onClick={() => handleSort()}>id:</div>
+                        //     <div className="table__elem-value">firstname:</div>
+                        //     <div className="table__elem-value">lastname:</div>
+                        //     <div className="table__elem-value">age</div>
+                        //     <div className="table__elem-value">country</div> */}
+                            {el.map((element, index)=>
+                               <div key={index} className='table__elem-valueee' style={{height: "25px", display: 'flex', alignItems: "center"}} onClick={() => element.key === 'id' && handleSort()}>{element.key}</div>
+                            )}
+                        </div>
+                    }
                     <div key={index} className="table__elem" style={{ display: "flex", flexDirection: "column" }}>
                         <button onClick={() => handleAdd(el, index)}>Append</button>
                         {el.map((elem, subIndex) =>
-                            <div key={subIndex} className='table__elem-value' style={{ background: elem.color, display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>{elem.value}
-                                <button onClick={()=>handleRemove(elem.id,elem.key)}>Delete</button>
+                            <div key={subIndex} className='table__elem-value' style={{ background: elem.color, display: 'flex', justifyContent: 'space-between', alignItems: "center", height: '25px' }}>{elem.value}
+                                {elem.value && <button onClick={() => handleRemove(elem.id, elem.key)}>Delete</button>}
                             </div>
                         )}
                         <CustomInput placeholder='key' index={index} inputsData={inputsData} setInputsData={setInputsData} />

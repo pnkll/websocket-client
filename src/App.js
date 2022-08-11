@@ -18,7 +18,7 @@ function App() {
   }
 
   if (!connection || !ws.current) {
-    return <>Соединение не установлено<br /><button onClick={handleUpdate}>Установить вручную</button></>
+    return <>Соединение не установлено<br /><button onClick={handleUpdate}>Подключиться</button></>
   }
 
 
